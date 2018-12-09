@@ -51,26 +51,7 @@ fn main() -> ! {
     writeln!(hstdout, "Version: {}", max17048.version().unwrap());
     writeln!(hstdout, "Voltage: {}", max17048.vcell().unwrap());
     writeln!(hstdout, "State of charge: {}%", max17048.soc().unwrap());
-
-    // // i2c.write(0x3C, &[0xCC, 0xAA]).unwrap();
-    // let mut buffer = [0u8; 2];
-    // // 0x08 is version reg
-    // // i2c.write(0x6C, &[0x08],).unwrap();
-    // // let val = i2c.read(0x36, &mut buffer).unwrap();
-    // const MAX17048_ADDR: u8 = 0x6C;
-    // i2c.write_read(MAX17048_ADDR, &[0x08], &mut buffer).unwrap();
-    // let version: u16 = (buffer[0] as u16) << 8 | buffer[1] as u16;
-    // writeln!(hstdout,"Silicon Version: {}", version);
-
-    // // let soc: u16 = (buffer[0] as u16) + (buffer[1] as u16 / 256);  //& 0xFF00
-    // // let soc: u16 = (buffer[0] as u16) << 8 & 0xFF00 | (buffer[1] as u16) & 0x00FF;
-    // i2c.write_read(MAX17048_ADDR, &[0x04], &mut buffer).unwrap();
-    // let soc: u16 = (buffer[0] as u16) << 8 | buffer[1] as u16;
-    // writeln!(hstdout,"Batt SoC: {}%", soc / 256);
-
-    // i2c.write_read(MAX17048_ADDR, &[0x02], &mut buffer).unwrap();
-    // let vlt: u16 = (buffer[0] as u16) << 8 | buffer[1] as u16;
-    // writeln!(hstdout,"Volt: {}", vlt as f32 * 0.000078125);
+    writeln!(hstdout, "Charge rate: {}%/hr", max17048.charge_rate().unwrap());
 
     loop {}
 }

@@ -35,6 +35,14 @@ where I: WriteRead<Error = E>,
         }
     }
 
+    /// Return C/Rate in %/hr
+    pub fn charge_rate(&mut self) -> Result<f32, E> {
+        match self.read(0x16) {
+            Ok(val) => Ok(val as f32 * 0.208),
+            Err(e) => Err(e)
+        }
+    }
+
     pub fn vcell(&mut self) -> Result<f32, E> {
         match self.read(0x02) {
             Ok(val) => Ok(val as f32 * 0.000078125),
