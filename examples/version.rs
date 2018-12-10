@@ -47,6 +47,7 @@ fn main() -> ! {
     let i2c = I2c::i2c1(dp.I2C1, (scl, sda), 100.khz(), clocks, &mut rcc.apb1r1);
 
     let mut max17048 = Max17048::new(i2c);
+    // max17048.quick_start().unwrap();
 
     writeln!(hstdout, "Version: {}", max17048.version().unwrap());
     writeln!(hstdout, "Voltage: {}", max17048.vcell().unwrap());

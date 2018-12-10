@@ -62,11 +62,7 @@ where I: WriteRead<Error = E> + Write<Error = E>,
                 value &= 0x00FF;
                 value |= (rcomp as u16) << 8;
                 // write to the rcomp bits only
-                self.i2c.write(MAX17048_ADDR, &[0x0C])?;
-                let msb = ((value & 0xFF00) >> 8) as u8;
-                let lsb = ((value & 0x00FF) >> 0) as u8;
-                self.i2c.write(MAX17048_ADDR, &[msb])?;
-                self.i2c.write(MAX17048_ADDR, &[lsb])?;
+                self.write(0x0C, value)?;
                 Ok(())
             },
             Err(e) => Err(e)
@@ -80,8 +76,11 @@ where I: WriteRead<Error = E> + Write<Error = E>,
         }
     }
 
-    // fn read(&mut self, reg: u8) -> u16 {
-    //     self.i2c.write_read(MAX17048_ADDR, &[reg], &mut self.recv_buffer).unwrap();
-    //     (self.recv_buffer[0] as u16) << 8 | self.recv_buffer[1] as u16
-    // }
+    fn write(&mut self, reg: u8, value: u16) -> Result<(), E> {
+        self.i2c.write(MAX17048_ADDR, &[reg])?;
+        let msb = ((value & 0xFF00) >> 8) as u8;
+        let lsb = ((value & 0x00FF) >> 0) as u8;
+        self.i2c.write(MAX17048_ADDR, &[msb, lsb])?;
+        Ok(())
+    }
 }
