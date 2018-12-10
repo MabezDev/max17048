@@ -37,6 +37,20 @@ where I: WriteRead<Error = E> + Write<Error = E>,
             Err(e) => Err(e)
         }
     }
+    
+    pub fn quick_start(&mut self) -> Result<(), E> {
+        // read the current reg vals
+        match self.read(0x06) {
+            Ok(mut value) => {
+                if (value >> 14 & 0x01) != 1 { // is the bit set?
+                    value |= 1 << 14; // set the bit
+                }
+                self.write(0x06, value)?;
+                Ok(())
+            },
+            Err(e) => Err(e)
+        }
+    }
 
     /// Return C/Rate in %/hr
     pub fn charge_rate(&mut self) -> Result<f32, E> {
