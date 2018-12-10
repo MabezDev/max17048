@@ -15,4 +15,5 @@ cortex-m-rt = "0.6.5"
 
 [dev-dependencies.stm32l4xx-hal]
 git = "https://github.com/mabezdev/stm32l4xx-hal"
+# path = "../stm32l4xx-hal"
 features= ["rt", "stm32l4x2"]
