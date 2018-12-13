@@ -55,9 +55,18 @@ where I: WriteRead<Error = E> + Write<Error = E>,
         }
     }
 
+    pub fn temp_compensation(&mut self, temp: f32) -> Result<(), E>{
+        let rcomp = if temp > 20.0 {
+            DEFAULT_RCOMP as f32 + (temp - 20.0) * -0.5
+        } else {
+            DEFAULT_RCOMP as f32 + (temp - 20.0) * -5.0
+        };
+        self.compensation(rcomp as u8)
+    }
+
     fn compensation(&mut self, rcomp: u8) -> Result<(), E>{
         // read the current reg vals
-        match self.read(0x02) {
+        match self.read(0x0C) {
             Ok(mut value) => {
                 value &= 0x00FF;
                 value |= (rcomp as u16) << 8;

@@ -49,10 +49,17 @@ fn main() -> ! {
     let mut max17048 = Max17048::new(i2c);
     // max17048.quick_start().unwrap();
 
-    writeln!(hstdout, "Version: {}", max17048.version().unwrap());
-    writeln!(hstdout, "Voltage: {}", max17048.vcell().unwrap());
-    writeln!(hstdout, "State of charge: {}%", max17048.soc().unwrap());
-    writeln!(hstdout, "Charge rate: {}%/hr", max17048.charge_rate().unwrap());
+    writeln!(hstdout, "Version: {}", max17048.version().unwrap()).unwrap();
+    writeln!(hstdout, "Voltage: {}", max17048.vcell().unwrap()).unwrap();
+    writeln!(hstdout, "State of charge: {}%", max17048.soc().unwrap()).unwrap();
+    writeln!(hstdout, "Charge rate: {}%/hr", max17048.charge_rate().unwrap()).unwrap();
+
+    // max17048.temp_compensation(75.0).unwrap();
+
+    // writeln!(hstdout, "Version: {}", max17048.version().unwrap()).unwrap();
+    // writeln!(hstdout, "Voltage: {}", max17048.vcell().unwrap()).unwrap();
+    // writeln!(hstdout, "State of charge: {}%", max17048.soc().unwrap()).unwrap();
+    // writeln!(hstdout, "Charge rate: {}%/hr", max17048.charge_rate().unwrap()).unwrap();
 
     loop {}
 }
