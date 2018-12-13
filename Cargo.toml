@@ -2,6 +2,24 @@
 name = "max17048"
 version = "0.1.0"
 authors = ["Scott Mabin <MabezDev@gmail.com>"]
+description = "A I2C driver crate for the max17048/9 LiPo Fuel gauge IC"
+keywords = ["no-std", "max17048", "fuel", "lipo", "embedded-hal"]
+categories = [
+    "embedded",
+    "hardware-support",
+    "no-std",
+]
+repository = "https://github.com/MabezDev/max17048"
+readme = "README.md"
+license = "MIT OR Apache-2.0"
+exclude = [
+	".travis.yml",
+	".gitignore",
+	"docs/",
+	"docs/*",
+    ".vscode/",
+    ".vscode/*",
+]
 edition = "2018"
 
 [dependencies]
